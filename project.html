@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Predict Price - LaptiQ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --dark-bg: #0f1c2d;
+      --navy: #1a2a40;
+      --teal: #00bcd4;
+      --purple: #9c27b0;
+      --glass: rgba(26, 42, 64, 0.5);
+      --border: rgba(255, 255, 255, 0.12);
+      --text-light: #e0e0e0;
+      --text-muted: #a0aec0;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Rajdhani', sans-serif;
+      background: linear-gradient(135deg, var(--dark-bg), #08111a);
+      background-size: 200% 200%;
+      animation: bgShift 12s ease infinite;
+      color: var(--text-light);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    @keyframes bgShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      max-width: 900px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--teal);
+      text-align: center;
+      margin-bottom: 30px;
+      text-shadow: 0 0 15px rgba(0, 188, 212, 0.6);
+      letter-spacing: 2px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 8px;
+      color: var(--text-light);
+      font-size: 1.1em;
+      font-weight: 600;
+    }
+
+    select, input[type="number"] {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-light);
+      font-size: 1em;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      transition: border-color 0.3s, background-color 0.3s;
+    }
+
+    select:focus, input[type="number"]:focus {
+      border-color: var(--teal);
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+
+    select option {
+      background-color: var(--navy);
+      color: var(--text-light);
+    }
+
+    .submit-button {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(90deg, var(--teal), var(--purple));
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .submit-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 188, 212, 0.4);
+    }
+
+    .result {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 1.5rem;
+      color: var(--teal);
+      background: rgba(0, 188, 212, 0.1);
+      border-radius: 12px;
+      padding: 18px;
+      border: 1px solid rgba(0, 188, 212, 0.3);
+      box-shadow: 0 0 15px rgba(0, 188, 212, 0.4);
+    }
+
+    .result strong {
+      color: var(--text-light);
+    }
+
+    .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 0.9em;
+        transition: color 0.3s;
+    }
+
+    .back-link:hover {
+        color: var(--teal);
+    }
+
+    @media (max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Predict Laptop Price</h1>
+    <form action="/project" method="post" class="form-grid">
+            <div class="form-row">
+                <label for="brand">Brand:</label>
+                <select id="brand" name="brand" required>
+                    <option value="">--Select Brand--</option>
+                    <option>ASUS</option>
+                    <option>Lenovo</option>
+                    <option>acer</option>
+                    <option>Avita</option>
+                    <option>HP</option>
+                    <option>DELL</option>
+                    <option>MSI</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="processor_brand">Processor Brand:</label>
+                <select id="processor_brand" name="processor_brand" required>
+                    <option value="">--Select Processor Brand--</option>
+                    <option>Intel</option>
+                    <option>AMD</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="processor_name">Processor Name:</label>
+                <select id="processor_name" name="processor_name" required>
+                    <option value="">--Select Processor Name--</option>
+                    <option>Core i3</option>
+                    <option>Core i5</option>
+                    <option>Celeron Dual</option>
+                    <option>Ryzen 5</option>
+                    <option>Ryzen 9</option>
+                    <option>M1</option>
+                    <option>Core i7</option>
+                    <option>Core i9</option>
+                    <option>Ryzen 7</option>
+                    <option>Pentium Quad</option>
+                    <option>Celeron Quad</option>
+                    <option>Athlon Dual</option>
+                    <option>Pentium Silver</option>
+                    <option>M2</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="processor_gnrtn">Processor Generation:</label>
+                <select id="processor_gnrtn" name="processor_gnrtn" required>
+                    <option value="">--Select Processor Generation--</option>
+                    <option>10th</option>
+                    <option>Not Available</option>
+                    <option>11th</option>
+                    <option>7th</option>
+                    <option>8th</option>
+                    <option>12th</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="ram_gb">RAM (GB):</label>
+                <select id="ram_gb" name="ram_gb" required>
+                    <option value="">--Select RAM--</option>
+                    <option>4 GB</option>
+                    <option>8 GB</option>
+                    <option>16 GB</option>
+                    <option>32 GB</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="ram_type">RAM Type:</label>
+                <select id="ram_type" name="ram_type" required>
+                    <option value="">--Select RAM Type--</option>
+                    <option>DDR4</option>
+                    <option>LPDDR4X</option>
+                    <option>LPDDR4</option>
+                    <option>DDR5</option>
+                    <option>LPDDR3</option>
+                    <option>DDR3</option>
+                    <option>UFS</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="ssd">SSD (GB):</label>
+                <select id="ssd" name="ssd" required>
+                    <option value="">--Select SSD--</option>
+                    <option>0 GB</option>
+                    <option>512 GB</option>
+                    <option>256 GB</option>
+                    <option>128 GB</option>
+                    <option>1024 GB</option>
+                    <option>2048 GB</option>
+                    <option>3072 GB</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="hdd">HDD (GB):</label>
+                <select id="hdd" name="hdd" required>
+                    <option value="">--Select HDD--</option>
+                    <option>1024 GB</option>
+                    <option>0 GB</option>
+                    <option>512 GB</option>
+                    <option>2048 GB</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="os">Operating System:</label>
+                <select id="os" name="os" required>
+                    <option value="">--Select OS--</option>
+                    <option>Windows</option>
+                    <option>Mac</option>
+                    <option>DOS</option>
+                    <option>Linux</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="os_bit">OS Bit:</label>
+                <select id="os_bit" name="os_bit" required>
+                    <option value="">--Select OS Bit--</option>
+                    <option>64-bit</option>
+                    <option>32-bit</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="graphic_card_gb">Graphic Card (GB):</label>
+                <select id="graphic_card_gb" name="graphic_card_gb" required>
+                    <option value="">--Select Graphic Card--</option>
+                    <option>0 GB</option>
+                    <option>2 GB</option>
+                    <option>4 GB</option>
+                    <option>6 GB</option>
+                    <option>8 GB</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="warranty">Warranty:</label>
+                <select id="warranty" name="warranty" required>
+                    <option value="">--Select Warranty--</option>
+                    <option>No warranty</option>
+                    <option>1 year</option>
+                    <option>2 years</option>
+                    <option>3 years</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="Touchscreen">Touchscreen:</label>
+                <select id="Touchscreen" name="Touchscreen" required>
+                    <option value="">--Select Touchscreen--</option>
+                    <option>No</option>
+                    <option>Yes</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label for="msoffice">MS Office:</label>
+                <select id="msoffice" name="msoffice" required>
+                    <option value="">--Select MS Office--</option>
+                    <option>No</option>
+                    <option>Yes</option>
+                </select>
+            </div>
+             <div class="form-row">
+                <label for="rating">Rating:</label>
+                <select id="rating" name="rating" required>
+                    <option value="">--Select Rating--</option>
+                    <option>2 stars</option>
+                    <option>3 stars</option>
+                    <option>4 stars</option>
+                    <option>5 stars</option>
+                </select>
+            </div>
+            <button type="submit" class="submit-button">Predict Price</button>
+        </form>
+        {% if prediction is defined %}
+        <div class="result" style="margin-top:30px; text-align:center; font-size:1.5rem; color:#185a9d; background:#e0f7fa; border-radius:12px; padding:18px;">
+            <strong>Predicted Price:</strong> ₹{{ prediction }}
+        </div>
+        {% endif %}
+        <a href="/" class="back-link">Go Back</a>
+    </div>
+</body>
+</html>

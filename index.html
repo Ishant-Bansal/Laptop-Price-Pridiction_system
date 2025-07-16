@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Laptop Price Predictor</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+ <style>
+    :root {
+      --bg-dark: #0f1c2d;
+      --bg-glass: rgba(26, 42, 64, 0.5);
+      --accent1: #00bcd4;
+      --accent2: #9c27b0;
+      --text-light: #e0e0e0;
+      --shadow: rgba(0,0,0,0.4);
+    }
+    body {
+      margin:0; padding:0;
+      font-family: 'Rajdhani', sans-serif;
+      background: linear-gradient(135deg, var(--bg-dark), #08111a);
+      background-size:200% 200%;
+      animation: gradientMove 20s ease infinite alternate;
+      color: var(--text-light);
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 40px;
+      background: rgba(15, 28, 45, 0.85);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.18);
+      border-bottom: 1.5px solid var(--accent1);
+      backdrop-filter: blur(10px);
+    }
+    .logo {
+      font-size: 2rem;
+      font-weight: 700;
+      font-family: 'Orbitron', sans-serif;
+      color: var(--accent1);
+      text-shadow: 0 0 10px var(--accent1);
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+    }
+    .nav-links a {
+      color: var(--text-light);
+      text-decoration: none;
+      font-size: 1.08rem;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 6px;
+      transition: background 0.25s, color 0.25s, box-shadow 0.25s;
+      position: relative;
+      letter-spacing: 0.5px;
+    }
+    .nav-links a:hover, .nav-links a:focus {
+      background: linear-gradient(90deg, var(--accent1), var(--accent2));
+      color: #fff;
+      box-shadow: 0 2px 12px rgba(0,188,212,0.18);
+      outline: none;
+    }
+    .nav-links a.active {
+      background: linear-gradient(90deg, var(--accent2), var(--accent1));
+      color: #fff;
+      box-shadow: 0 2px 12px rgba(156,39,176,0.18);
+    }
+    .hero {
+      margin:40px 20px;
+      padding:60px 20px;
+      background: var(--bg-glass);
+      border-radius:20px;
+      text-align:center;
+      box-shadow:0 8px 30px var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+    .hero h1 {
+      font-family:'Orbitron', sans-serif;
+      font-size:2.8rem;
+      background: linear-gradient(90deg,var(--accent1),var(--accent2));
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 15px rgba(0,188,212,0.3);
+    }
+    .hero p {
+      margin-top:15px;
+      font-size:1.1rem;
+      color:#ccc;
+    }
+    .section-container {
+      padding:40px 20px;
+      display:flex;
+      flex-direction:column;
+      gap:30px;
+      align-items:center;
+    }
+    .card {
+      width:90%; max-width:1000px;
+      display:flex;
+      background:var(--bg-glass);
+      backdrop-filter: blur(12px);
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:0 8px 30px var(--shadow);
+      transition:transform 0.3s;
+    }
+    .card:nth-child(even) { flex-direction: row-reverse; }
+    .card:hover { transform: scale(1.02); }
+    .card img {
+      width:45%;
+      object-fit:cover;
+      border-radius:15px;
+      margin:20px;
+      transition: transform 0.4s;
+    }
+    .card:hover img { transform: scale(1.05); }
+    .card-content {
+      padding:30px;
+      width:55%;
+    }
+    .card-content h3 {
+      font-family:'Orbitron', sans-serif;
+      font-size:1.6rem;
+      color:var(--accent1);
+      margin-bottom:10px;
+    }
+    .card-content p {
+      color:#ddd;
+      line-height:1.5;
+      font-size:1rem;
+    }
+    .predict-section {
+      margin:40px 20px;
+      padding:40px 20px;
+      text-align:center;
+      background:var(--bg-glass);
+      backdrop-filter: blur(12px);
+      border-radius:20px;
+      box-shadow:0 8px 30px var(--shadow);
+    }
+    .predict-section h2 {
+      font-family:'Orbitron', sans-serif;
+      font-size:2rem;
+      color: var(--accent2);
+    }
+    .predict-section a {
+      margin-top:20px;
+      display:inline-block;
+      padding:15px 40px;
+      font-size:1.1rem;
+      font-weight:600;
+      background:linear-gradient(90deg,var(--accent2),var(--accent1));
+      color:#fff;
+      text-decoration:none;
+      border-radius:50px;
+      transition:transform 0.3s, box-shadow 0.3s;
+    }
+    .predict-section a:hover {
+      transform: scale(1.05);
+      box-shadow:0 5px 25px rgba(0,188,212,0.3);
+    }
+    footer {
+      text-align:center;
+      padding:30px 20px;
+      margin-top:60px;
+      font-size:0.9rem;
+      background: rgba(0,0,0,0.6);
+      color:#aaa;
+      backdrop-filter: blur(10px);
+    }
+    @media(max-width:768px){
+      .card { flex-direction:column; }
+      .card img, .card-content { width:100%; margin:0; }
+      .hero h1 { font-size:2.2rem; }
+    }
+    @media(max-width: 700px){
+      nav { flex-direction: column; padding: 14px 10px; }
+      .nav-links { gap: 16px; margin-top: 10px; }
+      .logo { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">🔷 <span>Lapti<span class="highlight">Q</span></span></div>
+    <div class="nav-links">
+      <a href="/" class="{% if request.path == '/' %}active{% endif %}">Home</a>
+      <a href="/about" class="{% if request.path == '/about' %}active{% endif %}">About</a>
+      <a href="/contact" class="{% if request.path == '/contact' %}active{% endif %}">Contact</a>
+      <a href="/history" class="{% if request.path == '/history' %}active{% endif %}">History</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" data-aos="fade-up">
+    <h1>AI-Based Laptop Price Prediction</h1>
+    <p>Know your laptop's market value with just a few clicks. Fast, Accurate & Free.</p>
+  </section>
+
+  <!-- Info Cards -->
+  <section class="section-container">
+
+    <div class="card" data-aos="fade-right">
+      <img src="{{ url_for('static', filename='gaming.jpg') }}" alt="Gaming Laptop">
+      <div class="card-content">
+        <h3>Gaming Laptops</h3>
+        <p>High-performance laptops for gamers and creators. Equipped with powerful GPUs, high-refresh displays, and cooling systems.</p>
+      </div>
+    </div>
+
+    <div class="card" data-aos="fade-left">
+      <img src="{{ url_for('static', filename='business.jpg') }}" alt="Business Laptop">
+      <div class="card-content">
+        <h3>Business Laptops</h3>
+        <p>Secure, efficient laptops with enterprise features like TPM, fingerprint, long battery life, and excellent build quality.</p>
+      </div>
+    </div>
+
+    <div class="card" data-aos="fade-right">
+      <img src="{{ url_for('static', filename='student.jpg') }}" alt="Student Laptop">
+      <div class="card-content">
+        <h3>Student Laptops</h3>
+        <p>Lightweight, affordable, and versatile laptops designed for note-taking, browsing, and online learning.</p>
+      </div>
+    </div>
+
+    <div class="card" data-aos="fade-left">
+      <img src="{{ url_for('static', filename='ultra.jpg') }}" alt="Ultrabooks">
+      <div class="card-content">
+        <h3>Ultrabooks</h3>
+        <p>Sleek, stylish, and powerful devices. Perfect for professionals who want portability without compromising performance.</p>
+      </div>
+    </div>
+
+    <div class="card" data-aos="fade-up">
+      <img src="{{ url_for('static', filename='2in1.jpg') }}" alt="2-in-1 Laptops">
+      <div class="card-content">
+        <h3>2-in-1 Convertibles</h3>
+        <p>Hybrid laptops with touchscreens and stylus support. Great for creativity, note-taking, and flexibility.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Predict Button Section -->
+  <section class="predict-section" data-aos="zoom-in">
+    <h2>Ready to Predict?</h2>
+    <p>Click below and start entering your laptop specs to get the estimated price.</p>
+    <br />
+    <a href="/project">Predict Now →</a>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <p>&copy; 2025 PredictMyLaptop | Designed by Ishu 🚀</p>
+  </footer>
+
+  <!-- AOS Animation Script -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About - LaptiQ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+  <style>
+    :root {
+      --dark-blue: #0f1c2d;
+      --navy-blue: #1a2a40;
+      --accent-teal: #00bcd4;
+      --accent-purple: #9c27b0;
+      --text-light: #e0e0e0;
+      --border-color: rgba(255, 255, 255, 0.12);
+      --shadow-strong: rgba(0, 0, 0, 0.5);
+      --glass-bg: rgba(26, 42, 64, 0.4);
+      --feature-bg: rgba(26, 42, 64, 0.6);
+      --feature-hover-bg: rgba(0, 188, 212, 0.12);
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--dark-blue), #08111a);
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-size: 200% 200%;
+      animation: gradientShift 15s ease infinite alternate;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+      background: var(--glass-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 22px;
+      padding: 45px 35px 35px;
+      box-shadow: 0 15px 50px var(--shadow-strong);
+      backdrop-filter: blur(12px);
+      animation: fadeIn 1.2s ease-out;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 3.5rem;
+      margin-bottom: 30px;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--accent-teal), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 15px rgba(0, 188, 212, 0.5);
+    }
+
+    .about-content {
+      font-size: 1.15rem;
+      text-align: center;
+      line-height: 1.8;
+      margin-bottom: 40px;
+    }
+
+    .about-content b {
+      color: var(--accent-teal);
+      font-weight: 700;
+      text-shadow: 0 0 8px rgba(0, 188, 212, 0.3);
+    }
+
+    .about-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .feature {
+      background: var(--feature-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 22px 28px;
+      min-width: 200px;
+      max-width: 280px;
+      text-align: center;
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 0 8px rgba(0,0,0,0.3);
+      transition: 0.3s ease;
+    }
+
+    .feature:hover {
+      background: var(--feature-hover-bg);
+      box-shadow: 0 8px 25px rgba(0, 188, 212, 0.25), inset 0 0 12px rgba(0,0,0,0.4);
+      transform: translateY(-8px) scale(1.02);
+    }
+
+    .feature i {
+      font-size: 2.8rem;
+      margin-bottom: 12px;
+      color: var(--accent-purple);
+      filter: drop-shadow(0 0 8px rgba(156, 39, 176, 0.4));
+    }
+
+    a {
+      display: block;
+      margin-top: 40px;
+      text-align: center;
+      color: var(--accent-teal);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.2rem;
+      transition: 0.3s ease;
+      text-shadow: 0 0 5px rgba(0, 188, 212, 0.2);
+    }
+
+    a:hover {
+      color: var(--accent-purple);
+      transform: translateY(-3px);
+      text-shadow: 0 0 8px rgba(156, 39, 176, 0.4);
+    }
+
+    @media (max-width: 850px) {
+      .container { padding: 35px 25px; }
+      h2 { font-size: 3rem; }
+      .about-content { font-size: 1.05rem; margin-bottom: 30px; }
+      .about-features { gap: 20px; }
+      .feature { padding: 20px 25px; font-size: 0.95rem; }
+      .feature i { font-size: 2.4rem; }
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 30px 15px; }
+      h2 { font-size: 2.5rem; }
+      .about-content { font-size: 1rem; }
+      .about-features { flex-direction: column; gap: 15px; }
+      .feature { width: 100%; max-width: 350px; }
+      .feature i { font-size: 2.2rem; }
+      a { font-size: 1rem; }
+    }
+
+    @media (max-width: 400px) {
+      h2 { font-size: 2rem; }
+      .about-content { font-size: 0.95rem; }
+      .feature { padding: 15px 18px; }
+      .feature i { font-size: 2rem; }
+      a { font-size: 0.9rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>About LaptiQ</h2>
+    <div class="about-content">
+      Welcome to <b>LaptiQ</b> — your futuristic laptop assistant. Compare, analyze, and predict laptop prices with ease.<br><br>
+      Whether you're a student, gamer, or business pro, LaptiQ helps you choose smartly.
+    </div>
+    <div class="about-features">
+      <div class="feature"><i class="fa-solid fa-magnifying-glass"></i><br>Smart Product Search</div>
+      <div class="feature"><i class="fa-solid fa-bolt"></i><br>Instant Price Prediction</div>
+      <div class="feature"><i class="fa-solid fa-laptop"></i><br>Latest Models</div>
+      <div class="feature"><i class="fa-solid fa-headset"></i><br>24/7 Support</div>
+    </div>
+    <a href="/">← Back to Home</a>
+  </div>
+</body>
+</html>

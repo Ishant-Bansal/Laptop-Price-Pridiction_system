@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Search History - LaptiQ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --dark-blue: #0f1c2d;
+      --navy-blue: #1a2a40;
+      --accent-teal: #00bcd4;
+      --accent-purple: #9c27b0;
+      --text-light: #e0e0e0;
+      --border-color: rgba(255, 255, 255, 0.12);
+      --glass-bg: rgba(26, 42, 64, 0.5);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: linear-gradient(135deg, var(--dark-blue), #08111a);
+      color: var(--text-light);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      background-size: 200% 200%;
+      animation: gradientShift 20s ease infinite alternate;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      background: var(--glass-bg);
+      border-radius: 18px;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.6);
+      padding: 40px;
+    }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.8rem;
+      text-align: center;
+      margin-bottom: 30px;
+      background: linear-gradient(90deg, var(--accent-teal), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .scroll-wrapper {
+      overflow-x: auto;
+      border-radius: 10px;
+    }
+
+    table {
+      width: 100%;
+      min-width: 900px;
+      border-collapse: collapse;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    th, td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-color);
+      text-align: left;
+      white-space: nowrap;
+      font-size: 1rem;
+    }
+
+    th {
+      background: rgba(0, 188, 212, 0.08);
+      color: var(--accent-teal);
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    tr:hover {
+      background-color: rgba(0, 188, 212, 0.06);
+    }
+
+    .no-history {
+      text-align: center;
+      padding: 20px;
+      margin-top: 30px;
+      background-color: rgba(156, 39, 176, 0.1);
+      border: 1px dashed var(--accent-purple);
+      border-radius: 12px;
+      font-size: 1.2rem;
+    }
+
+    a {
+      display: block;
+      text-align: center;
+      margin-top: 30px;
+      color: var(--accent-teal);
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--accent-purple);
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      h2 { font-size: 2.2rem; }
+      table { min-width: 600px; }
+    }
+
+    @media (max-width: 480px) {
+      h2 { font-size: 1.8rem; }
+      table { min-width: 500px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Search History</h2>
+
+    {% if history_entries and history_entries|length > 0 %}
+    <div class="scroll-wrapper">
+      <table>
+        <thead>
+          <tr>
+            {% for key in history_entries[0].keys() %}
+              <th>{{ key }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for entry in history_entries %}
+          <tr>
+            {% for value in entry.values() %}
+              <td>{{ value }}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+      <div class="no-history">No search history yet.</div>
+    {% endif %}
+
+    <a href="/">&larr; Back to Home</a>
+  </div>
+</body>
+</html>
